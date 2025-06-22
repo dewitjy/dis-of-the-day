@@ -1,13 +1,16 @@
-module.exports = {
-    presets: ['module:metro-react-native-babel-preset'],
-    plugins: [
-        ['module:react-native-dotenv', {
-            "moduleName": "@env",
-            "path": ".env",
-            "blacklist": null,
-            "whitelist": null,
-            "safe": false,
-            "allowUndefined": true
-        }]
-    ]
+module.exports = function(api) {
+    api.cache(true);
+    return {
+        presets: ['babel-preset-expo'], // Or metro-react-native-babel-preset if not using Expo
+        plugins: [
+            ['@babel/plugin-proposal-class-properties', { loose: false }],
+            ['@babel/plugin-proposal-private-methods', { loose: false }],
+            ['@babel/plugin-proposal-private-property-in-object', { loose: false }],
+            ['module:react-native-dotenv', {
+                moduleName: "@env",
+                path: ".env",
+                allowUndefined: true
+            }]
+        ],
+    };
 };
